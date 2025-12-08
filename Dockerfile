@@ -1,3 +1,4 @@
+# Garage S3-compatible object storage for Railway
 # Build stage to prepare config
 FROM alpine:3.19 AS builder
 
