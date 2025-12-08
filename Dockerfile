@@ -12,11 +12,11 @@ COPY start.sh /build/start.sh
 
 RUN chmod +x /build/start.sh
 
-# Generate default secrets for template (users should override these)
+# Generate default secrets for template (hex-only to avoid sed issues)
 RUN echo "Generating default secrets..." && \
     RPC_SECRET=$(openssl rand -hex 32) && \
-    ADMIN_TOKEN=$(openssl rand -base64 32 | tr -d '\n') && \
-    METRICS_TOKEN=$(openssl rand -base64 32 | tr -d '\n') && \
+    ADMIN_TOKEN=$(openssl rand -hex 24) && \
+    METRICS_TOKEN=$(openssl rand -hex 24) && \
     sed -i "s/RPC_SECRET_PLACEHOLDER/$RPC_SECRET/g" /build/garage.toml.template && \
     sed -i "s/ADMIN_TOKEN_PLACEHOLDER/$ADMIN_TOKEN/g" /build/garage.toml.template && \
     sed -i "s/METRICS_TOKEN_PLACEHOLDER/$METRICS_TOKEN/g" /build/garage.toml.template && \
