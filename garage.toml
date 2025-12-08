@@ -8,7 +8,7 @@ db_engine = "lmdb"
 replication_factor = 1
 
 [rpc]
-bind_addr = "[::]:3901"
+rpc_bind_addr = "[::]:3901"
 rpc_secret = "RPC_SECRET_PLACEHOLDER"
 
 [s3_api]
