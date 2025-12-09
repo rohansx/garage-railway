@@ -24,7 +24,8 @@ RUN chmod +x /start.sh
 # 3902 - S3 web interface
 # 3903 - Admin API
 
-ENV PORT=3900
+# Use Admin API port for Railway's healthcheck (has /health endpoint)
+ENV PORT=3903
 
 EXPOSE 3900 3901 3902 3903
 
