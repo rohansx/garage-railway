@@ -1,6 +1,9 @@
 # Garage S3-compatible object storage for Railway
 FROM alpine:3.19
 
+# Cache bust
+ARG CACHEBUST=1
+
 # Install dependencies
 RUN apk add --no-cache curl ca-certificates
 
