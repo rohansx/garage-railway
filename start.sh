@@ -50,5 +50,10 @@ echo "Starting Garage..."
 echo "S3 API: port 3900"
 echo "Admin API: port 3903"
 
+# Debug: show generated config
+echo "=== Generated Config ==="
+cat /etc/garage.toml
+echo "=== End Config ==="
+
 # Start garage
 exec /garage server
