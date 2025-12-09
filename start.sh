@@ -17,13 +17,34 @@ if [ -z "$GARAGE_METRICS_TOKEN" ]; then
     echo "Generated metrics token: $GARAGE_METRICS_TOKEN"
 fi
 
-# Create config from template
-cp /etc/garage/garage.toml.template /etc/garage.toml
+# Generate config file at runtime (bypasses any cached template)
+cat > /etc/garage.toml << CONFIGEOF
+# Garage configuration for Railway deployment
+metadata_dir = "/var/lib/garage/meta"
+data_dir = "/var/lib/garage/data"
+db_engine = "lmdb"
 
-# Replace placeholders with actual values
-sed -i "s/RPC_SECRET_PLACEHOLDER/$GARAGE_RPC_SECRET/g" /etc/garage.toml
-sed -i "s/ADMIN_TOKEN_PLACEHOLDER/$GARAGE_ADMIN_TOKEN/g" /etc/garage.toml
-sed -i "s/METRICS_TOKEN_PLACEHOLDER/$GARAGE_METRICS_TOKEN/g" /etc/garage.toml
+replication_factor = 1
+
+[rpc]
+rpc_bind_addr = "[::]:3901"
+rpc_secret = "$GARAGE_RPC_SECRET"
+
+[s3_api]
+s3_region = "garage"
+api_bind_addr = "[::]:3900"
+root_domain = ".s3.garage.localhost"
+
+[s3_web]
+bind_addr = "[::]:3902"
+root_domain = ".web.garage.localhost"
+index = "index.html"
+
+[admin]
+api_bind_addr = "[::]:3903"
+admin_token = "$GARAGE_ADMIN_TOKEN"
+metrics_token = "$GARAGE_METRICS_TOKEN"
+CONFIGEOF
 
 echo "Starting Garage..."
 echo "S3 API: port 3900"

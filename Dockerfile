@@ -12,10 +12,9 @@ RUN wget -O /garage https://garagehq.deuxfleurs.fr/_releases/v2.1.0/x86_64-unkno
     chmod +x /garage
 
 # Create directories
-RUN mkdir -p /var/lib/garage/meta /var/lib/garage/data /etc/garage
+RUN mkdir -p /var/lib/garage/meta /var/lib/garage/data
 
-# Copy config and startup script
-COPY garage.toml /etc/garage/garage.toml.template
+# Copy startup script (config is generated at runtime)
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
