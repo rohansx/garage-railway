@@ -1,4 +1,4 @@
-# Garage configuration for Railway deployment
+# Garage configuration for Railway deployment (v2)
 # Tokens will be replaced at runtime by start.sh
 
 metadata_dir = "/var/lib/garage/meta"
