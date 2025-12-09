@@ -1,5 +1,5 @@
-# Garage configuration for Railway deployment (v2)
-# Tokens will be replaced at runtime by start.sh
+# Garage configuration for Railway deployment
+# Config is generated at runtime by start.sh
 
 metadata_dir = "/var/lib/garage/meta"
 data_dir = "/var/lib/garage/data"
@@ -7,8 +7,8 @@ db_engine = "lmdb"
 
 replication_factor = 1
 
-[rpc]
 rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "127.0.0.1:3901"
 rpc_secret = "RPC_SECRET_PLACEHOLDER"
 
 [s3_api]

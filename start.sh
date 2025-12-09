@@ -26,8 +26,8 @@ db_engine = "lmdb"
 
 replication_factor = 1
 
-[rpc]
 rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "127.0.0.1:3901"
 rpc_secret = "$GARAGE_RPC_SECRET"
 
 [s3_api]
